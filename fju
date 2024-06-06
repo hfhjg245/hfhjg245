@@ -1,0 +1,12 @@
+{
+  "usingComponents": {},
+  "navigationBarTitleText": "关于",
+  "navigationBarTextStyle": "black",
+  "navigationBarBackgroundColor": "#fff"
+}
+
+
+<image src="/pages/weekly/xhr.jpeg"></image>
+<text>电影tt看</text>
+<text>第一周：小黄人</text>
+<text>点评：它是一个非常好看的电影</text>
