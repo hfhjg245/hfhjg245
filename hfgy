@@ -1,0 +1,43 @@
+# 12、xlrd.biff_count_records函数
+import sys
+def biff_count_records(mem, stream_offset, stream_len, fout=None):
+    """
+    模拟从内存中读取数据并“统计”BIFF记录数量的函数。
+    注意：这个函数不处理真实的BIFF格式，只是模拟。
+    :param mem: 字节数据，包含BIFF格式的数据
+    :param stream_offset: 从mem中开始读取的偏移量
+    :param stream_len: 从stream_offset开始读取的长度
+    :param fout: 输出流，默认为None（输出到标准输出）
+    :return: 假设的“记录”数量
+    """
+    # 检查输出流
+    if fout is None:
+        fout = sys.stdout  # 在Windows中，使用sys.stdout来重定向到标准输出
+    # 切片数据以模拟从特定偏移量和长度读取
+    data = mem[stream_offset:stream_offset + stream_len]
+    # 假设每个“记录”以特定的字节序列开始（例如：'\x00\x0B'），这里用简单的'\n'代替
+    record_start_bytes = b'\n'  # 只是一个示例，不是真实的BIFF记录标识
+    count = 0
+    # 遍历数据并“统计”记录
+    pos = 0
+    while pos < len(data):
+        if data.startswith(record_start_bytes, pos):
+            count += 1
+            # 假设记录长度固定，这里简化为换行符的长度
+            pos += len(record_start_bytes)
+        else:
+            # 如果不是记录开始，则向前移动一个字节
+            pos += 1
+    # 输出到文件或标准输出（如果提供了fout）
+    fout.write(f"Number of BIFF-like records: {count}\n")
+    # 注意：不需要手动关闭sys.stdout
+    return count
+if __name__ == '__main__':
+    fake_biff_data = b'This is not real BIFF data\nbut we pretend it is\nwith newline characters\nas record separators\n'
+    stream_offset = 0
+    stream_len = len(fake_biff_data)
+    # 调用函数并打印结果（将输出重定向到标准输出）
+    record_count = biff_count_records(fake_biff_data, stream_offset, stream_len)
+    # 这里不需要再次打印，因为结果已经通过fout输出到标准输出了
+    # 如果需要再次打印到控制台，可以取消下一行的注释
+    print(f"Number of BIFF-like records: {record_count}")
