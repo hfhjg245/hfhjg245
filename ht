@@ -1,0 +1,20 @@
+.scroll{
+  /* 100vh就是指元素的高度等于当前浏览器的视窗高度,即浏览器内部的可视区域的高度大小 */
+  height: 100vh; 
+  background-color: grey;
+}
+
+view{
+  height: 400rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/* 奇数 */
+view:nth-child(odd){
+  background-color: pink;
+}
+/* 偶数 */
+view:nth-child(even){
+  background-color: green;
+}
