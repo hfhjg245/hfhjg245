@@ -1,0 +1,11 @@
+X_train, X_test, Y_train, Y_test = train_test_split(stu_data.drop('G3', axis=1),  # 特征
+                                                    stu_data['G3'],  # 目标变量
+                                                    test_size=0.3, random_state=5)
+ 
+svm_model = SVC(random_state=6)
+# 训练模型
+svm_model.fit(X_train, Y_train)
+ 
+# 使用训练好的模型进行预测
+Y_pred = svm_model.predict(X_test)
+print(Y_pred)
